@@ -1,24 +1,17 @@
-ST7789 driver, based on [Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library)
+An ST7789 driver, originally written by [Floyd-Fish](https://github.com/Floyd-Fish/ST7789-STM32/tree/master) for STM32, ported & adapted for RP2040 by me. This port has kept all functions of the original library. The port is easily configurable. 
+BTW, it supports Cyrillic (and other non-latin) fonts very well!
 
-## Usage
-Add *ST7789* into CMakeLists.txt, in `target_link_libraries`
-
-### Pin mapping
-By default, CS is GPIO17, DC is GPIO16, SCK is GPIO18, TX is GPIO19, using the default SPI peripheral.\
-The pin mapping can be changed using `LCD_setPins`, before initializing the display. Make sure that the chosen SCK and TX pins are usable with the selected SPI peripheral. \
-The usage of the reset pin isn't enabled by default. Setting it to -1 disables it. \
-The SPI peripheral can be selected using `LCD_setSPIperiph`
-
+## Deployment
+- Add *st7789* folder into your project
+- Add  `add_subdirectory(st7789)` into your root CMakeLists.txt file
+- define RESET, DC, CS gpio numbers in st7789.h
+- change pin numbers for MISO, CLK in prepare_spi() and SPI instance, if needed
+- Init the device: call prepare_spi(), then ST7789_Init()
+- You're all set! Draw something cool!
 
 ### Functions:
-
-`LCD_setPins(uint16_t dc, uint16_t cs, int16_t rst, uint16_t sck, uint16_t tx);` selects the pins used by the display \
-`LCD_setSPIperiph(spi_inst_t * s);` selects the SPI peripheral used by the display \
-`LCD_initDisplay(uint16_t width, uint16_t height);` initializes the GPIO, SPI interface and display driver. The width and height of the screen needs to be specified\
-`LCD_setRotation(uint8_t m);` sets the rotation\
-`LCD_WritePixel(int x, int y, uint16_t col);` writes a single pixel to the screen\
-`LCD_WriteBitmap(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t *bitmap);` writes a bitmap to the screen\
-
+Draws pixels, fills, graphic primitives, strings (incl. non-latin), bitmaps.
+See [original lib's manual](https://github.com/Floyd-Fish/ST7789-STM32/tree/master) 
 
 ### DMA usage
-DMA  usage is disabled by default, but can be enabled by uncommenting `#define USE_DMA 1` in *st7789.h*
+DMA  usage is disabled, and was not ported. Do not uncomment anything related to DMA ~~for your life.~~
