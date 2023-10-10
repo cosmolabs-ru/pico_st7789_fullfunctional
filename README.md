@@ -15,3 +15,5 @@ See [original lib's manual](https://github.com/Floyd-Fish/ST7789-STM32/tree/mast
 
 ### DMA usage
 DMA  usage is disabled, and was not ported. Do not uncomment anything related to DMA ~~for your life.~~
+
+![изображение](https://github.com/cosmolabs-ru/pico_st7789_fullfunctional/assets/24324220/8289bdf5-17b8-461f-848f-a392f7da101c)
